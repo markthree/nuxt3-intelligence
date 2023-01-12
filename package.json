@@ -1,13 +1,13 @@
 {
-  "version": "0.0.0",
-  "name": "name",
-  "description": "description",
+  "version": "0.0.1",
+  "name": "nuxt3-intelligence",
+  "description": "nuxt3 智能工具集合",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/name/repo.git"
+    "url": "git+https://github.com/markthree/nuxt3-intelligence.git"
   },
   "exports": {
     ".": {
@@ -37,19 +37,17 @@
     "release": "bumpp --commit --push --tag && npm publish"
   },
   "keywords": [
-    "lib",
-    "tool",
-    "node",
-    "utils"
+    "nuxt3",
+    "intelligence"
   ],
   "author": {
-    "name": "name",
-    "email": "xx@xx.com",
-    "url": "https://github.com/name"
+    "name": "markthree",
+    "email": "1801982702@qq.com",
+    "url": "https://github.com/markthree"
   },
   "bugs": {
     "email": "xx@xx.com",
-    "url": "https://github.com/name/repo/issues"
+    "url": "https://github.com/markthree/nuxt3-intelligence/issues"
   },
   "license": "MIT",
   "devDependencies": {

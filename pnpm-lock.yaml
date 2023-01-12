@@ -28,9 +28,9 @@ importers:
 
   examples:
     specifiers:
-      name: workspace:0.0.0
+      nuxt3-intelligence: workspace:*
     devDependencies:
-      name: link:..
+      nuxt3-intelligence: link:..
 
 packages:
 
