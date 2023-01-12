@@ -1,5 +1,12 @@
+/**
+ * nuxt config
+ */
 export default {
 	modules: [
+		'./foo', // local module
+		'path', // node builtinModules
+		require('path'), // dynamic import
+		import('path'), // dynamic import
 		'@unocss/nuxt',
 		'@vueuse/nuxt',
 		'@nuxtjs/critters',
