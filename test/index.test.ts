@@ -2,9 +2,10 @@ import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 import {
 	clearComments,
-	getStaticDepsFromNuxtConfig,
+	readTextFile,
 	lookUpNuxtConfig,
-	readTextFile
+	getStaticDepsFromCode,
+	getStaticDepsFromNuxtConfig
 } from '../src/index'
 
 describe('core', async () => {
@@ -24,7 +25,14 @@ describe('core', async () => {
 
 	it('clearComments', () => {
 		expect(clearComments(text)).toMatchInlineSnapshot(`
-			"
+			"import {} from 'mkdist'
+			import {} from 'unbuild'
+
+			import {} from '@markthree/utils'
+
+			import {} from '@markthree/m-type-tools/is'
+
+
 			export default {
 				modules: [
 					'./foo', 
@@ -44,21 +52,40 @@ describe('core', async () => {
 		`)
 	})
 
+	it('getStaticDepsFromCode', async () => {
+		const deps = getStaticDepsFromCode(text)
+
+		expect(deps).toBeInstanceOf(Array)
+
+		expect(deps).toMatchInlineSnapshot(`
+			[
+			  "mkdist",
+			  "unbuild",
+			  "@markthree/utils",
+			  "@markthree/m-type-tools",
+			]
+		`)
+	})
+
 	it('getStaticDepsFromNuxtConfig', async () => {
 		const deps = await getStaticDepsFromNuxtConfig(cwd)
 
 		expect(deps).toBeInstanceOf(Array)
 
 		expect(deps).toMatchInlineSnapshot(`
-      [
-        "@unocss/nuxt",
-        "@vueuse/nuxt",
-        "@nuxtjs/critters",
-        "@nuxtjs/color-mode",
-        "nuxt-simple-sitemap",
-        "@nuxtjs/html-validator",
-        "@nuxt-themes/docus",
-      ]
-    `)
+			[
+			  "mkdist",
+			  "unbuild",
+			  "@markthree/utils",
+			  "@markthree/m-type-tools",
+			  "@nuxt-themes/docus",
+			  "@unocss/nuxt",
+			  "@vueuse/nuxt",
+			  "@nuxtjs/critters",
+			  "@nuxtjs/color-mode",
+			  "nuxt-simple-sitemap",
+			  "@nuxtjs/html-validator",
+			]
+		`)
 	})
 })

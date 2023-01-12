@@ -1,3 +1,10 @@
+import {} from 'mkdist'
+import {} from 'unbuild'
+// @ts-ignore
+import {} from '@markthree/utils'
+// @ts-ignore
+import {} from '@markthree/m-type-tools/is'
+
 /**
  * nuxt config
  */

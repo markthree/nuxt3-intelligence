@@ -16,11 +16,15 @@ export async function getStaticDepsFromNuxtConfig(
 
 	const text = clearComments(await readTextFile(configPath))
 
+	const _normal = getStaticDepsFromCode(text) as string[]
+
 	const _modules = matchStringArrayFromText('modules', text)
 
 	const _extends = matchStringArrayFromText('extends', text)
 
-	const deps = _modules.concat(_extends)
+	const deps = [
+		...new Set(_normal.concat(_extends, _modules))
+	]
 
 	return filterNpmDeps(deps)
 }
@@ -91,4 +95,18 @@ export function filterNpmDeps(deps: string[]) {
 
 export function clearComments(code: string) {
 	return code.replace(/\/\/.*|\/\*[\w\W]*?\*\//g, '')
+}
+
+export function getStaticDepsFromCode(code: string) {
+	const deps = code.match(/(?<=from\s+?['"]).*?(?=['"])/g)
+	if (!deps) {
+		return []
+	}
+	return deps.map(dep => {
+		if (!dep.startsWith('@')) {
+			return dep
+		}
+		const [user, pkg] = dep.split('/')
+		return `${user}/${pkg}`
+	})
 }
