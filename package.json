@@ -1,5 +1,5 @@
 {
-  "version": "0.0.1",
+  "version": "0.0.2",
   "name": "nuxt3-intelligence",
   "description": "nuxt3 智能工具集合",
   "main": "./dist/index.cjs",
