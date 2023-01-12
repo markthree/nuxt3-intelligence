@@ -22,9 +22,9 @@
   "scripts": {
     "test": "vitest",
     "build": "unbuild",
-    "build:esm": "mkdist -d",
     "build:deno": "udeno",
-    "dev": "pnpm build:watch",
+    "dev": "pnpm build:stub",
+    "build:esm": "mkdist -d",
     "play": "tsx src/index.ts",
     "test:watch": "vitest --watch",
     "coverage": "vitest --coverage",
