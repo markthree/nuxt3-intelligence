@@ -27,6 +27,7 @@
     "build:esm": "mkdist -d",
     "play": "tsx src/index.ts",
     "test:watch": "vitest --watch",
+    "test:update": "vitest --update",
     "coverage": "vitest --coverage",
     "prepublishOnly": "pnpm build",
     "build:stub": "pnpm build --stub",
@@ -61,5 +62,8 @@
     "udeno": "^0.3.5",
     "unbuild": "^1.0.2",
     "vitest": "^0.27.1"
+  },
+  "dependencies": {
+    "c12": "^1.1.0"
   }
 }
