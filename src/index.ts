@@ -140,8 +140,8 @@ export function createDefaultGenPrerenderRoutesSyncOptions(
 	override: Partial<GenPrerenderRoutesSyncOptions> = {}
 ): GenPrerenderRoutesSyncOptions {
 	return {
-		deps: './conetnt',
-		source: './content',
+		deps: './content',
+		source: './content/**/*.md',
 		replace(s: string) {
 			return s
 				.replace('./content', '')
