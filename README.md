@@ -14,12 +14,25 @@ npm i nuxt3-intelligence
 
 ### Program
 
+#### getStaticDepsFromNuxtConfig
+
 ```ts
 import { getStaticDepsFromNuxtConfig } from 'nuxt3-intelligence'
 
 const deps = getStaticDepsFromNuxtConfig()
 
-deps // Get all static deps for modules and extends
+deps // Get all static deps for modules and extends 
+```
+
+#### genPrerenderRoutesSync
+
+```ts
+import { genPrerenderRoutesSync, createDefaultGenPrerenderRoutesSyncOptions } from 'nuxt3-intelligence'
+
+const defaultOptions = createDefaultGenPrerenderRoutesSyncOptions() // https://content.nuxtjs.org/ mode
+const routes = genPrerenderRoutesSync(defaultOptions)
+
+routes // Get all routes for nuxt content with cache
 ```
 
 <br />
