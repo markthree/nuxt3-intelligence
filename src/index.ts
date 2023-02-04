@@ -1,8 +1,10 @@
+import { sync } from 'fast-glob'
 import { resolve } from 'node:path'
 import { existsSync } from 'node:fs'
 import { cwd as _cwd } from 'node:process'
-import { builtinModules } from 'node:module'
 import { readFile } from 'node:fs/promises'
+import { builtinModules } from 'node:module'
+import { createFsComputedSync } from 'file-computed'
 
 export async function readTextFile(path: string) {
 	const buffer = await readFile(path)
@@ -109,4 +111,44 @@ export function getStaticDepsFromCode(code: string) {
 		const [user, pkg] = dep.split('/')
 		return `${user}/${pkg}`
 	})
+}
+
+interface GenPrerenderRoutesSyncOptions {
+	cachePath?: string
+	source: string
+	deps: Array<string> | string
+	replace(s: string): string
+}
+
+export function genPrerenderRoutesSync(
+	options: GenPrerenderRoutesSyncOptions
+) {
+	const { cachePath, source, deps, replace } = options
+
+	const FC = createFsComputedSync({
+		cachePath
+	})
+
+	return FC(deps, () => {
+		return sync(source, {
+			onlyFiles: true
+		}).map(v => replace(v))
+	})
+}
+
+export function createDefaultGenPrerenderRoutesSyncOptions(
+	override: Partial<GenPrerenderRoutesSyncOptions> = {}
+): GenPrerenderRoutesSyncOptions {
+	return {
+		deps: './conetnt',
+		source: './content',
+		replace(s: string) {
+			return s
+				.replace('./content', '')
+				.replace(/\.md/, '')
+				.replace(/index$/, '')
+				.replace(/\d\./g, '')
+		},
+		...override
+	}
 }
